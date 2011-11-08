@@ -1,7 +1,7 @@
 class PositionsController < ApplicationController
   
-    # Devise
-    before_filter :authenticate_user!
+  # Devise
+  before_filter :authenticate_user!
 
   # GET /positions
   # GET /positions.json

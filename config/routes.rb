@@ -1,4 +1,6 @@
 Famijobs::Application.routes.draw do
+  resources :profiles
+
   resources :positions
 
   devise_for :users

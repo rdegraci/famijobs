@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111107173243) do
+ActiveRecord::Schema.define(:version => 20111107232659) do
 
   create_table "positions", :force => true do |t|
     t.string   "title"
@@ -18,6 +18,21 @@ ActiveRecord::Schema.define(:version => 20111107173243) do
     t.float    "rate"
     t.integer  "user_id"
     t.boolean  "open"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "profiles", :force => true do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.string   "phone"
+    t.integer  "user_id"
+    t.boolean  "available"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
