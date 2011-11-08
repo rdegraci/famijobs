@@ -1,12 +1,26 @@
-
-
 <h1>jobs.familab.org</h1>
-
+<hr>
 <div class = "open_positions">
 <%=
 	render(:partial => "positions/open",
 	:object => @positions)
 %>
 </div>
+<hr>
+<div class = "job_seekers">
+<%=
+	render(:partial => "profiles/job_seekers",
+	:object => @jobseekers)
+%>
+</div>
+<hr>
+<% if user_signed_in? %>
+    <%= link_to 'Create Job Position', new_position_path %> |
+	<% if current_user.profile != nil %>
+		<%= link_to 'Profile', profile_path(current_user.profile) %>
+	<% else %>
+		<%= link_to 'Profile', new_profile_path %>
+	<% end %>
+<% end %>
 
 
