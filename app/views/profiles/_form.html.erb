@@ -20,6 +20,14 @@
     <%= f.text_field :lastname %>
   </div>
   <div class="field">
+    <%= f.label 'Title' %><br />
+    <%= f.text_field :jobtitle %>
+  </div>
+  <div class="field">
+    <%= f.label 'Skills (comma delimited)' %><br />
+    <%= f.text_field :skills %>
+  </div>
+  <div class="field">
     <%= f.label :address1 %><br />
     <%= f.text_field :address1 %>
   </div>
@@ -44,8 +52,7 @@
     <%= f.text_field :phone %>
   </div>
   <div class="field">
-	<p>Available for work?
-    <%= f.label :available %><br />
+    <%= f.label 'Available for work?' %><br />
     <%= f.check_box :available %>
   </div>
   <div class="actions">

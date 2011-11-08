@@ -11,6 +11,8 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :phone
       t.references :user
       t.boolean :available
+      t.string :jobtitle
+      t.text :skills
 
       t.timestamps
     end

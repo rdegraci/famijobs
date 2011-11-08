@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20111107232659) do
     t.string   "phone"
     t.integer  "user_id"
     t.boolean  "available"
+    t.string   "jobtitle"
+    t.text     "skills"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
