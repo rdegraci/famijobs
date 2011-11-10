@@ -1,8 +1,8 @@
 <h3>Open positions</h3>
-<form>
+
 <table>
   <tr>
-    <th><input type= "submit" value="Apply"></th>
+
     <th>Title</th>
     <th>Description</th>
     <th>Rate</th>
@@ -11,17 +11,16 @@
     <th></th>
   </tr>
 
+
 <% @positions.each do |position| %>
   <tr>
-	<td><input type = "checkbox" value="apply" name="apply"></td>
-    	<td><%= position.title %></td>
+    	<td><%= check_box('position','applied_to_position') %> <%= position.title %></td>
     	<td><%= position.description %></td>
     	<td><%= position.rate %></td>
     	<td><%= link_to 'Show', position %></td>
   </tr>
 <% end %>
 </table>
-</form>
-
 <br />
+
 
