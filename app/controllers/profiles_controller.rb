@@ -1,21 +1,12 @@
 class ProfilesController < ApplicationController
-    
+
   # Devise
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!   
+  
+  
+  # Remove index method since it will be replaced by
+  # AdminProfilesController
     
-  # GET /profiles
-  # GET /profiles.json
-  def index
-    
-    # Later allow for Admin access
-    redirect_to :root
-    return
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @profiles }
-    end
-  end
 
   # GET /profiles/1
   # GET /profiles/1.json

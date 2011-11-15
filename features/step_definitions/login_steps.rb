@@ -8,9 +8,15 @@ When /^a User has registered$/ do
 end
 
 Then /^the dashboard will display open positions$/ do
-  pending # express the regexp above with the code you wish you had
+  position = FactoryGirl.create(:position)
+  visit root_path
+  page.should have_content('Rails Developer')
 end
 
 Then /^the dashboard will display available job seekers$/ do
-  pending # express the regexp above with the code you wish you had
+  user = User.find_by_email('rdegraci@gmail.com')
+  user.profile = FactoryGirl.create(:profile)
+  user.profile.save!
+  visit root_path
+  page.should have_content('iOS Developer')
 end
