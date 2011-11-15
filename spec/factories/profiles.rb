@@ -10,5 +10,8 @@ FactoryGirl.define do
     state "FL"
     zipcode "32821"
     phone "571-482-9809"
+    available true
+    jobtitle "iOS Developer"
+    skills "Ruby, C++, Objective-C"
   end
 end
