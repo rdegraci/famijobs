@@ -1,5 +1,5 @@
 <h3>Open positions</h3>
-
+<% form_tag applied_position, :method => :put do %>
 <table>
   <tr>
 
@@ -14,11 +14,13 @@
 
 <% @positions.each do |position| %>
   <tr>
-    	<td><%= check_box('position','applied_to_position') %> <%= position.title %></td>
+    	<td><%= check_box_tag "position id", position.id %> <%= position.title %></td>
     	<td><%= position.description %></td>
     	<td><%= position.rate %></td>
     	<td><%= link_to 'Show', position %></td>
   </tr>
+<% end %>
+<%= submit_tag "Apply"%>
 <% end %>
 </table>
 <br />

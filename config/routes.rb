@@ -1,7 +1,7 @@
 Famijobs::Application.routes.draw do
   resources :profiles
 
-  resources :positions
+  resources :positions, :collection => { :applied => :put }
 
   devise_for :users
 

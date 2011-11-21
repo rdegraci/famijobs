@@ -102,4 +102,8 @@ class PositionsController < ApplicationController
       format.json { head :ok }
     end
   end
+ def applied
+ #TODO mark all selected jobs as applied for
+ redirect_to :root
+ end
 end
