@@ -1,7 +1,5 @@
 Famijobs::Application.routes.draw do
   resources :profiles
-
-  #resources :positions, :collection => {:put => :applied }
   
   resources :positions do 
     put :applied, :on => :collection
