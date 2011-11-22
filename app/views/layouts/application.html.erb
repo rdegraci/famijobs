@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<% if Rails.env == "development" %>
+<%= params.inspect %> <hr> 
+<% end %>
+
  <p class="notice"><%= notice %></p>
  <p class="alert"><%= alert %></p>
 
