@@ -1,8 +1,12 @@
 Famijobs::Application.routes.draw do
   resources :profiles
 
-  resources :positions, :collection => { :applied => :put }
-
+  #resources :positions, :collection => {:put => :applied }
+  
+  resources :positions do 
+    put :applied, :on => :collection
+  end
+  
   devise_for :users
 
   # The priority is based upon order of creation:
