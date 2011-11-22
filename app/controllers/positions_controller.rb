@@ -102,8 +102,19 @@ class PositionsController < ApplicationController
       format.json { head :ok }
     end
   end
- def applied
- #TODO mark all selected jobs as applied for
- redirect_to :root
- end
+  
+  # PUT /positions/applied
+  def applied
+   #logger.info (">>>>#{params.inspect}<<<<")
+   positions = params[:position]
+   positions.each_key do |position|
+     is_applied = position[:applied]
+     if is_applied == 1
+       job_position = Position.find position.to_i
+       job_position.applicants.build(:user_id => current_user) 
+     end
+   end
+  end
+ 
+ 
 end
