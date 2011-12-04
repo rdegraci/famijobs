@@ -9,15 +9,14 @@ describe DashboardController do
       p3 = FactoryGirl.create :perl_dev
       open_positions = [p1, p2, p3]
       
-      position = mock_model(Position)
       Position.stub(:open_positions).and_return(open_positions)
-      position.should_receive(:open_positions).and_return(open_positions)  
+      Position.should_receive(:open_positions).and_return(open_positions)  
       
       get :index
-      open_positions = position.open_positions
+      open_positions = Position.open_positions
       assigns(:open_positions).should eql(open_positions)
       
-      response.should render_template("dashboard/index")
+      response.should render_template(root_path)
     end
     
     it "gets job seekers" do
