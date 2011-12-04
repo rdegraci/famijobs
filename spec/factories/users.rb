@@ -6,14 +6,19 @@ FactoryGirl.define do
     password '123456'
     profile
     
-    factory :user1 do
+    factory :alvin do
       email 'alvin@alvin.com'
-      association :profile, :factory => :profile1
+      association :profile, :factory => :alvin_profile
     end
     
-    factory :user2 do
+    factory :bob do
       email 'bob@bob.com'
-      association :profile, :factory => :profile2
+      association :profile, :factory => :bob_profile
+    end
+    
+    factory :charlie do
+      email 'charly@charlie.com'
+      association :profile, :factory => :charlie_profile
     end
     
   end

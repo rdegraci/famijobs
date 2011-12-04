@@ -14,7 +14,7 @@ FactoryGirl.define do
     jobtitle "iOS Developer"
     skills "Ruby, C++, Objective-C"
     
-    factory :profile1 do
+    factory :alvin_profile do
       firstname "Alvin"
       lastname "Armand"
       address1 "123 A Street"
@@ -28,7 +28,7 @@ FactoryGirl.define do
       skills "C, gcc"
     end
     
-    factory :profile2 do
+    factory :bob_profile do
       firstname "Bob"
       lastname "Bulward"
       address1 "123 B Street"
@@ -41,5 +41,20 @@ FactoryGirl.define do
       jobtitle "C++ Developer"
       skills "C++, cpp"
     end
+    
+    factory :charlie_profile do
+      firstname "Charlie"
+      lastname "Chan"
+      address1 "123 C Street"
+      address2 "Apt 3"
+      city "Orlando"
+      state "FL"
+      zipcode "32821"
+      phone "123-654-2468"
+      available true
+      jobtitle "Node.JS Developer"
+      skills "Node.JS, javascript"
+    end
+    
   end
 end
