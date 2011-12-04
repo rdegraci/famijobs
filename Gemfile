@@ -36,9 +36,12 @@ gem 'jquery-rails'
 gem 'devise'
 
 group :test, :development do
+  gem 'webrat'	# necessary since capybara is not yet supported in view specs
+  gem 'capybara'
   gem "rspec-rails", "~> 2.6"
   gem "factory_girl_rails"
   gem 'seed_dump'
+  gem 'launchy'
 end
 
 group :test do
