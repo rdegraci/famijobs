@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
 
   # Devise
-  before_filter :authenticate_user!   
+  before_filter :authenticate_user! if Rails.env == 'production' || Rails.env == 'development'
   
   
   # Remove index method since it will be replaced by
