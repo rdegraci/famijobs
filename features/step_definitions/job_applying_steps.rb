@@ -1,15 +1,20 @@
-When /^the User selects a position$/ do
-  pending # express the regexp above with the code you wish you had
+Given /^there are positions$/ do
+  pos1 = FactoryGirl.create :php_dev
+  pos2 = FactoryGirl.create :rails_dev
+  pos3 = FactoryGirl.create :perl_dev 
 end
 
-When /^applies for the position$/ do
-  pending # express the regexp above with the code you wish you had
+
+When /^the User applies for the first open position$/ do
+  visit root_path
+  check 'position[1][applied]'
+  click_button 'Apply'
 end
 
-Then /^the position is removed from the open positions$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^the position is not listed in the open positions$/ do
+  find("#open_positions_table").should have_no_content('PHP Developer')
 end
 
-Then /^the position is added to the applied positions$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^the position is listed in the applied positions$/ do
+  Pending #find("#applied_positions_table").should have_content('PHP Developer')
 end

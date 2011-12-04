@@ -1,6 +1,6 @@
 <h3>Job Seekers</h3>
 
-<table>
+<table id="job_seekers_table">
   <tr>
     <th>First</th>
     <th>Last</th>
@@ -10,7 +10,7 @@
     <th></th>
   </tr>
 
-<% @jobseekers.each do |profile| %>
+<% job_seekers.each do |profile| %>
   <tr>
     <td><%= profile.firstname %></td>
     <td><%= profile.lastname %></td>

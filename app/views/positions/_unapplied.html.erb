@@ -1,7 +1,7 @@
-<h3>Open positions</h3>
+<h3>Unapplied positions</h3>
 
 
-<table id="open_positions_table">
+<table>
   <tr>
 
     <th>Title</th>
@@ -14,17 +14,17 @@
 
 <%= form_tag :apply_positions, :method => :put do %>
 
-<% open_positions.each do |position| %>
+<% unapplied_positions.each do |position| %>
 
   <tr>
-	    <td class="position_item"> <%= check_box('position', 'applied', { :index => position.id }, checked_value = "1" , unchecked_value = "0") %> <%= position.title %></td>
+	    <td><%= check_box('position', 'apply', { :index => position.id }, checked_value = "1" , unchecked_value = "0") %> <%= position.title %></td>
     	<td><%= position.description %></td>
     	<td><%= position.rate %></td>
     	<td><%= link_to 'Show', position %></td>
   </tr>
 <% end %>
 
-<%= submit_tag "Apply for Job"%>
+<%= submit_tag "Unapply"%>
 <% end %>
 </table>
 <br />

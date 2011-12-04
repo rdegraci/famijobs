@@ -8,7 +8,7 @@ When /^a User has registered$/ do
 end
 
 Then /^the dashboard will display open positions$/ do
-  position = FactoryGirl.create(:position)
+  position = FactoryGirl.create(:rails_dev)
   visit root_path
   page.should have_content('Rails Developer')
 end

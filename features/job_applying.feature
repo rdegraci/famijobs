@@ -3,7 +3,7 @@ Feature: Apply for Job
 
 Scenario: Applying for Jobs
 Given a User has registered
-When the User selects a position
-And applies for the position
-Then the position is removed from the open positions
-And the position is added to the applied positions
+And there are positions
+When the User applies for the first open position
+Then the position is not listed in the open positions
+And the position is listed in the applied positions

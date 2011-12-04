@@ -1,0 +1,32 @@
+<h3>Applied positions</h3>
+
+
+<table>
+  <tr>
+
+    <th>Title</th>
+    <th>Description</th>
+    <th>Rate</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<%= form_tag :unapply_positions, :method => :put do %>
+
+<% applied_positions.each do |position| %>
+
+  <tr>
+	    <td><%= check_box('position', 'unapplied', { :index => position.id }, checked_value = "1" , unchecked_value = "0") %> <%= position.title %></td>
+    	<td><%= position.description %></td>
+    	<td><%= position.rate %></td>
+    	<td><%= link_to 'Show', position %></td>
+  </tr>
+<% end %>
+
+<%= submit_tag "Unapply"%>
+<% end %>
+</table>
+<br />
+
+

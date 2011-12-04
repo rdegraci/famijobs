@@ -3,14 +3,14 @@
 <div class = "open_positions">
 <%=
 	render(:partial => "positions/open",
-	:object => @positions)
+	:locals =>{ :open_positions => @open_positions })
 %>
 </div>
 <hr>
 <div class = "job_seekers">
 <%=
 	render(:partial => "profiles/job_seekers",
-	:object => @jobseekers)
+	:locals =>{ :job_seekers => @job_seekers })
 %>
 </div>
 <hr>

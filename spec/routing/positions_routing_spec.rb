@@ -31,5 +31,15 @@ describe PositionsController do
       delete("/positions/1").should route_to("positions#destroy", :id => "1")
     end
 
+    ###
+    
+    it "routes to #apply" do
+      put("/positions/apply").should route_to("positions#apply")
+    end
+    
+    it "routes to #unapply" do
+      put("/positions/unapply").should route_to("positions#unapply")
+    end
+    
   end
 end

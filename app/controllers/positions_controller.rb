@@ -102,19 +102,28 @@ class PositionsController < ApplicationController
       format.json { head :ok }
     end
   end
-  
-  # PUT /positions/applied
-  def applied
+    
+  # Apply for a collection of Positions
+  # PUT /positions/apply
+  def apply
    #logger.info (">>>>#{params.inspect}<<<<")
-   positions = params[:position]
-   positions.each_key do |position|
-     is_applied = position[:applied]
-     if is_applied == 1
-       job_position = Position.find position.to_i
-       job_position.applicants.build(:user_id => current_user) 
+   positions_hash = params[:position]
+   positions_hash.each_key do |key|
+     internal_hash = positions_hash[key] 
+     is_applied = internal_hash['applied']
+     if is_applied == '1'
+       job_position = Position.find key.to_i
+       job_position.applicants << current_user
+       job_position.save
      end
    end
+   redirect_to :root
   end
- 
- 
+  
+  # Unapply from a collection of Positions
+  # PUT /positions/unapply
+  def unapply
+   redirect_to :root
+  end
+  
 end
