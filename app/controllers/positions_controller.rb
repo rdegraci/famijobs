@@ -1,7 +1,9 @@
 class PositionsController < ApplicationController
   
+  include PositionsHelper
+  
   # Devise
-  before_filter :authenticate_user!
+  before_filter :authenticate_user! if Rails.env == 'production' || Rails.env == 'development'
 
   # GET /positions
   # GET /positions.json
@@ -106,20 +108,15 @@ class PositionsController < ApplicationController
   # Apply for a collection of Positions
   # PUT /positions/apply
   def apply
-   #logger.info (">>>>#{params.inspect}<<<<")
-   positions_hash = params[:position]
-   positions_hash.each_key do |key|
-     internal_hash = positions_hash[key] 
-     is_applied = internal_hash['applied']
-     if is_applied == '1'
-       job_position = Position.find key.to_i
-       job_position.applicants << current_user
-       job_position.save
-     end
-   end
-   redirect_to :root
+    positions_hash = params[:position]
+    positions = self.extract positions_hash
+    #logger.info(">>>>#{positions.inspect}<<<<")
+    #p positions, current_user
+    Position.apply(positions, current_user)
+    
+    redirect_to :root
   end
-  
+    
   # Unapply from a collection of Positions
   # PUT /positions/unapply
   def unapply
