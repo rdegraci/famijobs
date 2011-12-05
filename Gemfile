@@ -35,13 +35,14 @@ gem 'jquery-rails'
 
 gem 'devise'
 gem 'heroku'
-gem 'taps'
+
 
 group :production do
   gem 'pg'
 end
 
 group :test, :development do
+  gem 'taps'
   gem 'sqlite3'
   gem 'webrat'	# necessary since capybara is not yet supported in view specs
   gem 'capybara'
