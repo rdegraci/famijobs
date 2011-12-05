@@ -34,6 +34,8 @@ gem 'jquery-rails'
 # gem 'ruby-debug'
 
 gem 'devise'
+gem 'heroku'
+gem 'taps'
 
 group :production do
   gem 'pg'
