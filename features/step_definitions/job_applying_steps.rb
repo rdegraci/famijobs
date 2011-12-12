@@ -7,7 +7,7 @@ end
 
 When /^the User applies for the first open position$/ do
   visit root_path
-  check 'position[1][applied]'
+  check 'position[1][apply]'
   click_button 'Apply'
 end
 
