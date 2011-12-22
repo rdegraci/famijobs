@@ -26,6 +26,22 @@ describe PositionsController do
   
   describe "PUT unapply" do
     it "unapplies the current user from applied positions" do
+      current_user = FactoryGirl.create :bob
+      
+      p1 = FactoryGirl.create :php_dev
+      p2 = FactoryGirl.create :rails_dev
+      p3 = FactoryGirl.create :perl_dev
+      applied_positions = [p1, p2, p3]
+      
+      # We stub different return values, depending on the input values
+      Position.stub(:unapply).with([], nil).and_return([])
+      Position.stub(:unapply).with(applied_positions, current_user).and_return(applied_positions)
+
+      put :unapply
+      
+      Position.unapply(applied_positions, current_user)
+      
+      response.should redirect_to(root_path)
     end
   end
   

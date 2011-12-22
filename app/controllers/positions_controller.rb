@@ -109,17 +109,18 @@ class PositionsController < ApplicationController
   # PUT /positions/apply
   def apply
     positions_hash = params[:position]
-    positions = self.extract positions_hash
-    #logger.info(">>>>#{positions.inspect}<<<<")
-    #p positions, current_user
+    positions = self.extract_apply positions_hash
     Position.apply(positions, current_user)
-    
+
     redirect_to :root
   end
     
   # Unapply from a collection of Positions
   # PUT /positions/unapply
   def unapply
+    positions_hash = params[:position]
+    positions = self.extract_unapply positions_hash
+    Position.unapply(positions, current_user)
    redirect_to :root
   end
   
