@@ -8,8 +8,13 @@ When /^a User has registered$/ do
 end
 
 Then /^the dashboard will display open positions$/ do
+  user1 = FactoryGirl.create(:bob)
   position = FactoryGirl.create(:rails_dev)
+  user1.positions << position
+  user1.save
+  
   visit root_path
+  
   page.should have_content('Rails Developer')
 end
 

@@ -36,22 +36,19 @@ describe 'dashboard/index.html.erb' do
     rendered.should =~ /PHP Developer/
   end
   
-  it "does not display applied jobs" do
+  it "displays open jobs" do
     current_user = mock_model(Profile, :firstname => 'Alvin', :lastname => "Alva", :jobtitle => 'PHP Developer')
-    position1 = mock_model(Position, :title => "PHP Developer", :description => 'PHP Developer', :rate => '1.0', :job_applicants => [current_user])
+    position1 = mock_model(Position, :title => "PHP Developer", :description => 'PHP Developer', :rate => '1.0', :user_id => current_user, :open => true)
     
-    @applied_positions = [position1]
+    other_user = mock_model(Profile, :firstname => 'Bob', :lastname => "Barker", :jobtitle => 'Rails Developer')
+    position2 = mock_model(Position, :title => "Perl Developer", :description => 'Perl Developer', :rate => '1.0', :user_id => other_user, :open => true)
     
-    render :partial => "positions/applied", :locals => {:applied_positions => @applied_positions}
+    @open_positions = [position1, position2]
     
-    rendered.should !~ /PHP Developer/
+    render :partial => "positions/open", :locals => {:open_positions => @open_positions}
+    
+    rendered.should =~ /PHP Developer/
+    rendered.should =~ /Perl Developer/
   end
-  
+    
 end
-
-
-# @positions = [position1, position2, position3]
-# 
-# render(:partial => 'positions/open', :locals => { :positions => @positions})
-# 
-# rendered.should contain("PHP Developer")
