@@ -3,9 +3,20 @@ class ProfilesController < ApplicationController
   # Devise
   before_filter :authenticate_user! if Rails.env == 'production' || Rails.env == 'development'
   
-  
-  # Remove index method since it will be replaced by
-  # AdminProfilesController
+  # GET /profiles
+  # GET /profiles.json
+  def index
+    begin
+      @profiles = [current_user.profile]
+    rescue
+      @profiles = []
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json => @profiles }
+    end
+  end
     
 
   # GET /profiles/1

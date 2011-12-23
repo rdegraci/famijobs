@@ -26,7 +26,7 @@
     <td><%= profile.state %></td>
     <td><%= profile.zipcode %></td>
     <td><%= profile.phone %></td>
-	<td><%= position.open %></td>
+	<td><%= profile.available %></td>
     <td><%= link_to 'Show', profile %></td>
     <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
     <td><%= link_to 'Destroy', profile, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -36,4 +36,5 @@
 
 <br />
 
-<%= link_to 'New Profile', new_profile_path %>
+<%= link_to 'New Profile', new_profile_path %> |
+<%= link_to 'Home', root_path %>
