@@ -3,45 +3,49 @@
 
 
 <% if user_signed_in? %>
-	<div class = "unapplied">
-	<%=
-		render(:partial => "positions/unapplied",
-		:locals =>{ :unapplied_positions => @unapplied_positions })
-	%>
-	</div>
-	<hr>
-	<div class = "job_seekers">
-	<%=
-		render(:partial => "profiles/job_seekers",
-		:locals =>{ :job_seekers => @job_seekers })
-	%>
-	</div>
-	<hr>
-	<div class = "applied">
-	<%=
-		render(:partial => "positions/applied",
-		:locals =>{ :applied_positions => @applied_positions })
-	%>
-	<hr>
-	
-	<%= link_to 'My Job Positions', positions_path %> |
-	<%= link_to 'Create Job Position', new_position_path %> |
-	<% if current_user.profile != nil %>
-		<%= link_to 'Profile', profile_path(current_user.profile) %>
-	<% else %>
-		<%= link_to 'Profile', new_profile_path %>
-	<% end %>
-	
-	<% else %>
-	
-	<div class = "open">
-	<%=
-		render(:partial => "positions/open",
-		:locals =>{ :open_positions => @open_positions })
-	%>
-	</div>
-	
 
+	<% if current_user.profile == nil %>
+		<p>Before we get started, please create a Profile. Your profile is necessary so that we can quickly match you up to potential jobs and also to let employers quickly find you.</p>
+		<%= link_to 'Create My Profile!', new_profile_path %>
+		
+	<% else %>
+		<div class = "unapplied">
+		<%=
+			render(:partial => "positions/unapplied",
+			:locals =>{ :unapplied_positions => @unapplied_positions })
+		%>
+		</div>
+		<hr>
+		<div class = "job_seekers">
+		<%=
+			render(:partial => "profiles/job_seekers",
+			:locals =>{ :job_seekers => @job_seekers })
+		%>
+		</div>
+		<hr>
+		<div class = "applied">
+		<%=
+			render(:partial => "positions/applied",
+			:locals =>{ :applied_positions => @applied_positions })
+		%>
+		<hr>
+	
+		<%= link_to 'My Job Positions', positions_path %> |
+		<%= link_to 'Create Job Position', new_position_path %> |
+		<% if current_user.profile != nil %>
+			<%= link_to 'Profile', profile_path(current_user.profile) %>
+		<% else %>
+			<%= link_to 'Profile', new_profile_path %>
+		<% end %>
+
+	
+		<div class = "open">
+		<%=
+			render(:partial => "positions/open",
+			:locals =>{ :open_positions => @open_positions })
+		%>
+		</div>
+	<% end %>
 	
 <% end %>
 
