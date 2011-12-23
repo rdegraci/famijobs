@@ -1,60 +1,80 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Firstname:</b>
-  <%= @profile.firstname %>
-</p>
+<% if @current_user == nil || @current_user.profile != @profile %>
 
-<p>
-  <b>Lastname:</b>
-  <%= @profile.lastname %>
-</p>
+	<p>
+	  <b>Firstname:</b>
+	  <%= @profile.firstname %>
+	</p>
 
-<p>
-  <b>Title:</b>
-  <%= @profile.jobtitle %>
-</p>
+	<p>
+	  <b>Lastname:</b>
+	  <%= @profile.lastname %>
+	</p>
 
-<p>
-  <b>Skills:</b>
-  <%= @profile.skills %>
-</p>
+	<p>
+	  <b>Title:</b>
+	  <%= @profile.jobtitle %>
+	</p>
+	<%= link_to 'Home', root_path %>
+	
+<% else %>
 
-<p>
-  <b>Available for work:</b>
-  <%= @profile.available %>
-</p>
+	<p>
+	  <b>Firstname:</b>
+	  <%= @profile.firstname %>
+	</p>
 
-<p>
-  <b>Address1:</b>
-  <%= @profile.address1 %>
-</p>
+	<p>
+	  <b>Lastname:</b>
+	  <%= @profile.lastname %>
+	</p>
 
-<p>
-  <b>Address2:</b>
-  <%= @profile.address2 %>
-</p>
+	<p>
+	  <b>Title:</b>
+	  <%= @profile.jobtitle %>
+	</p>
 
-<p>
-  <b>City:</b>
-  <%= @profile.city %>
-</p>
+	<p>
+	  <b>Skills:</b>
+	  <%= @profile.skills %>
+	</p>
 
-<p>
-  <b>State:</b>
-  <%= @profile.state %>
-</p>
+	<p>
+	  <b>Available for work:</b>
+	  <%= @profile.available %>
+	</p>
 
-<p>
-  <b>Zipcode:</b>
-  <%= @profile.zipcode %>
-</p>
+	<p>
+	  <b>Address1:</b>
+	  <%= @profile.address1 %>
+	</p>
 
-<p>
-  <b>Phone:</b>
-  <%= @profile.phone %>
-</p>
+	<p>
+	  <b>Address2:</b>
+	  <%= @profile.address2 %>
+	</p>
 
+	<p>
+	  <b>City:</b>
+	  <%= @profile.city %>
+	</p>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Home', root_path %>
+	<p>
+	  <b>State:</b>
+	  <%= @profile.state %>
+	</p>
+
+	<p>
+	  <b>Zipcode:</b>
+	  <%= @profile.zipcode %>
+	</p>
+
+	<p>
+	  <b>Phone:</b>
+	  <%= @profile.phone %>
+	</p>
+	<%= link_to 'Edit', edit_profile_path(@profile) %> |
+	<%= link_to 'Home', root_path %>
+	
+<% end %>

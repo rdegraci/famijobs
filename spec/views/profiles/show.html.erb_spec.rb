@@ -12,6 +12,10 @@ describe "profiles/show.html.erb" do
       :zipcode => "Zipcode",
       :phone => "Phone"
     ))
+    
+    @user = stub_model(User)
+    @current_user = assign(:current_user, @user)
+    @user.stub(:profile).and_return(@profile)
   end
 
   it "renders attributes in <p>" do
