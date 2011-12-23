@@ -23,8 +23,15 @@ class PositionsController < ApplicationController
   # GET /positions/1
   # GET /positions/1.json
   def show
-    @position = Position.find(params[:id])
-
+    
+    @query_position = Position.find(params[:id]) 
+    
+    begin
+      @position = current_user.positions.find(params[:id])
+    rescue
+      @position = nil
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @position }

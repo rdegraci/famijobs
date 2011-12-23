@@ -1,25 +1,65 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @position.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @position.description %>
-</p>
-
-<p>
-  <b>Rate:</b>
-  <%= @position.rate %>
-</p>
-
-<p>
-  <b>Open:</b>
-  <%= @position.open %>
-</p>
 
 
-<%= link_to 'Edit', edit_position_path(@position) %> |
-<%= link_to 'Home', root_path %>
+
+<% if @position == nil %>
+
+	<h1>Position</h1>
+	<p>
+	  <b>Title:</b>
+	  <%= @query_position.title %>
+	</p>
+
+	<p>
+	  <b>Description:</b>
+	  <%= @query_position.description %>
+	</p>
+
+	<p>
+	  <b>Rate:</b>
+	  <%= @query_position.rate %>
+	</p>
+
+	<p>
+	  <b>Open:</b>
+	  <%= @query_position.open %>
+	</p>
+	<hr>
+	<%= link_to 'Home', root_path %>
+	
+<% else %>
+
+	<h1>Position</h1>
+	<p>
+	  <b>Title:</b>
+	  <%= @position.title %>
+	</p>
+
+	<p>
+	  <b>Description:</b>
+	  <%= @position.description %>
+	</p>
+
+	<p>
+	  <b>Rate:</b>
+	  <%= @position.rate %>
+	</p>
+
+	<p>
+	  <b>Open:</b>
+	  <%= @position.open %>
+	</p>
+	
+	<hr>
+	<div class = "unapplied">
+	<%=
+		render(:partial => "positions/applicants",
+		:locals =>{ :position => @position })
+	%>
+	</div>
+	<hr>
+	<%= link_to 'Edit', edit_position_path(@position) %> |
+	<%= link_to 'Home', root_path %>
+
+<% end %>
