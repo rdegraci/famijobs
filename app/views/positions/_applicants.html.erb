@@ -1,0 +1,31 @@
+<h3>Applicants</h3>
+
+<table id="position_applicants_table">
+  <tr>
+
+    <th>First</th>
+    <th>Last</th>
+    <th>Title</th>
+    <th>Skills</th>
+    <th>Phone</th>
+    <th></th>
+  </tr>
+
+<% position.applicants.each do |user| %>
+
+  <tr>
+	    <td><%= user.profile.firstname %></td>
+		<td><%= user.profile.lastname %></td>
+		<td><%= user.profile.title %></td>
+		<td><%= user.profile.skills %></td>
+		<td><%= user.profile.phone %></td>
+    	<td><%= link_to 'Show', position %></td>
+  </tr>
+<% end %>
+
+
+</table>
+<br />
+
+
+
