@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
   def show
     begin
       @profile = Profile.find(params[:id])
-      @profile = current_user.profile
+      @current_user = current_user
       respond_to do |format|
         format.html # show.html.erb
         format.json { render :json => @profile }
@@ -48,10 +48,11 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
     begin
-      @profile = Profile.find(params[:id])
+      @query_profile = Profile.find(params[:id])
       @profile = current_user.profile
+      raise if @query_profile != @profile
     rescue
-      redirec_to :root
+      redirect_to :root
     end
   end
 
@@ -77,7 +78,6 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1.json
   def update
     begin
-      @profile = Profile.find(params[:id])
       @profile = current_user.profile
     rescue
       redirect_to :root
@@ -99,7 +99,6 @@ class ProfilesController < ApplicationController
   # DELETE /profiles/1.json
   def destroy
     begin
-      @profile = Profile.find(params[:id])
       @profile = current_user.profile
       @profile.destroy
     rescue
