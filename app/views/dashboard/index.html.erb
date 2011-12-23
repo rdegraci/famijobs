@@ -1,20 +1,8 @@
 <h1>jobs.familab.org</h1>
 <hr>
-<div class = "open">
-<%=
-	render(:partial => "positions/open",
-	:locals =>{ :open_positions => @open_positions })
-%>
-</div>
+
 
 <% if user_signed_in? %>
-    <%= link_to 'Create Job Position', new_position_path %> |
-	<% if current_user.profile != nil %>
-		<%= link_to 'Profile', profile_path(current_user.profile) %>
-	<% else %>
-		<%= link_to 'Profile', new_profile_path %>
-	<% end %>
-	
 	<div class = "unapplied">
 	<%=
 		render(:partial => "positions/unapplied",
@@ -35,6 +23,25 @@
 		:locals =>{ :applied_positions => @applied_positions })
 	%>
 	<hr>
+	
+	<%= link_to 'My Job Positions', positions_path %> |
+	<%= link_to 'Create Job Position', new_position_path %> |
+	<% if current_user.profile != nil %>
+		<%= link_to 'Profile', profile_path(current_user.profile) %>
+	<% else %>
+		<%= link_to 'Profile', new_profile_path %>
+	<% end %>
+	
+	<% else %>
+	
+	<div class = "open">
+	<%=
+		render(:partial => "positions/open",
+		:locals =>{ :open_positions => @open_positions })
+	%>
+	</div>
+	
+
 	
 <% end %>
 
