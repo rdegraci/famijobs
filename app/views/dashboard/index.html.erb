@@ -37,15 +37,17 @@
 		<% else %>
 			<%= link_to 'Profile', new_profile_path %>
 		<% end %>
-
-	
-		<div class = "open">
-		<%=
-			render(:partial => "positions/open",
-			:locals =>{ :open_positions => @open_positions })
-		%>
-		</div>
+		
 	<% end %>
+	
+<% else %>
+	
+	<div class = "open">
+	<%=
+		render(:partial => "positions/open",
+		:locals =>{ :open_positions => @open_positions })
+	%>
+	</div>
 	
 <% end %>
 
