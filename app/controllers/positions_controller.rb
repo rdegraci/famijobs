@@ -117,7 +117,7 @@ class PositionsController < ApplicationController
   def apply
     positions_hash = params[:position]
     positions = self.extract_apply positions_hash
-    Position.apply(positions, current_user)
+    @applied = Position.apply(positions, current_user)
 
     redirect_to :root
   end
@@ -127,8 +127,8 @@ class PositionsController < ApplicationController
   def unapply
     positions_hash = params[:position]
     positions = self.extract_unapply positions_hash
-    Position.unapply(positions, current_user)
-   redirect_to :root
+    @unapplied = Position.unapply(positions, current_user)
+    redirect_to :root
   end
   
 end
