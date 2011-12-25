@@ -1,14 +1,12 @@
-Given /^there are positions$/ do
-  user1 = FactoryGirl.create :alvin
-  
-  pos1 = FactoryGirl.create :php_dev
-  pos2 = FactoryGirl.create :rails_dev
-  pos3 = FactoryGirl.create :perl_dev 
-  
-  user1.positions << pos1 << pos2 << pos3
-  user1.save
-end
 
+
+Given /^a user has logged in$/ do
+  visit root_path
+  click_link 'Sign in'
+  fill_in 'Email', :with => 'capybara@elvenlabs.com'
+  fill_in 'Password', :with => '123456'
+  click_button "Sign in"
+end
 
 When /^the User applies for the first unapplied position$/ do
   visit root_path
