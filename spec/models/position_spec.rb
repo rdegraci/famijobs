@@ -3,20 +3,41 @@ require 'spec_helper'
 describe Position do
  
  it "is valid with valid attributes" do
-   Position.new.should be_valid
+   
+   u = FactoryGirl.create :alvin
+   
+   position = Position.create(:title => "Title", :description => "Description", :rate => 1.23, :open => true, :user => u) 
+          
+   position.should be_valid
+  
  end
  
  it "is not valid without a title" do
    position = Position.new :title => nil
+   position.should_not be_valid
  end
+  
+ it "is not valid without a description" do
+   position = Position.new :description => nil
+    position.should_not be_valid
+ end
+ 
+ it "is not valid without a rate" do
+   position = Position.new :rate => nil
+    position.should_not be_valid
+ end
+  
  
  # Business Rules
  
  describe "#open_positions" do
    it "returns positions that are open" do
-     p1 = FactoryGirl.create(:php_dev)
-     p2 = FactoryGirl.create(:rails_dev, :open => false)
-     p3 = FactoryGirl.create(:perl_dev)
+     
+     owner = FactoryGirl.create :bob
+     
+     p1 = FactoryGirl.create(:php_dev, :user => owner)
+     p2 = FactoryGirl.create(:rails_dev, :user => owner, :open => false)
+     p3 = FactoryGirl.create(:perl_dev, :user => owner)
      
      open_positions = Position.open_positions
      open_positions.should == [p1, p3]
@@ -26,11 +47,12 @@ describe Position do
  describe "#apply" do
    it "applies the current user to a collection of jobs" do
      
-     current_user = FactoryGirl.create :bob
+     owner = FactoryGirl.create :bob
+     p1 = FactoryGirl.create(:php_dev, :user => owner)
+     p2 = FactoryGirl.create(:rails_dev, :user => owner)
+     p3 = FactoryGirl.create(:perl_dev, :user => owner)
      
-     p1 = FactoryGirl.create(:php_dev)
-     p2 = FactoryGirl.create(:rails_dev)
-     p3 = FactoryGirl.create(:perl_dev)
+     current_user = FactoryGirl.create :alvin
      
      positions = [p1, p3]
      result = Position.apply(positions, current_user)
@@ -57,16 +79,21 @@ describe Position do
      
      current_user = FactoryGirl.create :bob
      
-     p1 = FactoryGirl.create(:php_dev)
-     p2 = FactoryGirl.create(:rails_dev)
-     p3 = FactoryGirl.create(:perl_dev)
+     owner = FactoryGirl.create :alvin
+     p1 = FactoryGirl.create(:php_dev, :user => owner)
+     p2 = FactoryGirl.create(:rails_dev, :user => owner)
+     p3 = FactoryGirl.create(:perl_dev, :user => owner)
+     
+     p1.applicants << current_user
+     p1.save
+     
+     p3.applicants << current_user
+     p3.save
      
      positions = [p1, p3]
+     
      result = Position.unapply(positions, current_user)
      result.should eql(positions)
-     
-     unapplied = Position.unapplied_by(current_user)
-     unapplied.should eql([])
    end
    
    it "will handle if the positions is empty and the current_user is nil" do
@@ -82,28 +109,17 @@ describe Position do
  end
  
  describe "#unapplied_by" do
-   it "returns positions that a current user has not applied to" do
+   it "returns all positions not applied by the current user" do
+    
      current_user = FactoryGirl.create :bob
-     other_user = FactoryGirl.create :alvin
      
-     p1 = FactoryGirl.create(:php_dev)
-     p2 = FactoryGirl.create(:rails_dev)
-     p3 = FactoryGirl.create(:perl_dev)
-     
-     p3.save
-     
-     other_user.positions << p1
-     other_user.positions << p2
-     other_user.positions << p3
-     other_user.save
-     
-     current_user.applications << p1
-     current_user.applications << p2
-     
-     current_user.save
-     
-     positions = Position.unapplied_by(current_user)
-     positions.should eql([p3])
+     owner = FactoryGirl.create :alvin
+     p1 = FactoryGirl.create(:php_dev, :user => owner)
+     p2 = FactoryGirl.create(:rails_dev, :user => owner)
+     p3 = FactoryGirl.create(:perl_dev, :user => owner)
+          
+     unapplied = Position.unapplied_by(current_user)
+     unapplied.should eql([p1, p2, p3])
      
    end
  end

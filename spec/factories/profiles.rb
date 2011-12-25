@@ -13,6 +13,9 @@ FactoryGirl.define do
     available true
     jobtitle "iOS Developer"
     skills "Ruby, C++, Objective-C"
+    user do # necessary for validations
+      u = FactoryGirl.create :user 
+    end
     
     factory :alvin_profile do
       firstname "Alvin"
@@ -26,6 +29,9 @@ FactoryGirl.define do
       available true
       jobtitle "C Programmer"
       skills "C, gcc"
+      user do # necessary for validations
+        u = FactoryGirl.create :alvin 
+      end
     end
     
     factory :bob_profile do
@@ -40,6 +46,9 @@ FactoryGirl.define do
       available true
       jobtitle "C++ Developer"
       skills "C++, cpp"
+      user do # necessary for validations
+        u = FactoryGirl.create :bob 
+      end
     end
     
     factory :charlie_profile do
@@ -54,6 +63,9 @@ FactoryGirl.define do
       available true
       jobtitle "Node.JS Developer"
       skills "Node.JS, javascript"
+      user do # necessary for validations
+        u = FactoryGirl.create :charlie 
+      end
     end
     
   end

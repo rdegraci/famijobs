@@ -10,9 +10,12 @@ module ControllerMacros
   def login_user
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
-      user = FactoryGirl.create(:user)
+      
+      # Creating the profile, creates the User
+      profile = FactoryGirl.create :profile
+      
       #user.confirm! # or set a confirmed_at inside the factory. Only necessary if you are using the confirmable module
-      sign_in user
+      sign_in profile.user
     end
   end
 end

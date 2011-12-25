@@ -61,6 +61,7 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(params[:profile])
     @profile.available = true
+    @profile.user = current_user
     respond_to do |format|
       if @profile.save
         current_user.profile = @profile

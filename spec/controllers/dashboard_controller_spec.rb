@@ -9,9 +9,11 @@ describe DashboardController do
   describe "GET index" do
     it "gets open positions" do
       
-      p1 = FactoryGirl.create :php_dev
-      p2 = FactoryGirl.create :rails_dev
-      p3 = FactoryGirl.create :perl_dev
+      user = FactoryGirl.build :user
+      
+      p1 = FactoryGirl.build :php_dev, :user => user
+      p2 = FactoryGirl.build :rails_dev, :user => user
+      p3 = FactoryGirl.build :perl_dev, :user => user
       open_positions = [p1, p2, p3]
       
       Position.stub(:open_positions).and_return(open_positions)
@@ -26,8 +28,10 @@ describe DashboardController do
     end
     
     it "gets job seekers" do
+      
       profile1 = FactoryGirl.create :alvin_profile
       profile2 = FactoryGirl.create :bob_profile
+      
       job_seekers = [subject.current_user.profile, profile1, profile2]
       
       Profile.stub(:job_seekers).and_return(job_seekers)
@@ -42,13 +46,15 @@ describe DashboardController do
     end
     
     it "gets positions the current user has applied to" do
-            
-      p1 = FactoryGirl.create :php_dev
+                  
+      owner = FactoryGirl.create :alvin
+      
+      p1 = FactoryGirl.create :php_dev, :user => owner
       subject.current_user.applications << p1
       
-      p2 = FactoryGirl.create :rails_dev
+      p2 = FactoryGirl.build :rails_dev, :user => owner
       
-      p3 = FactoryGirl.create :perl_dev
+      p3 = FactoryGirl.build :perl_dev, :user => owner
       subject.current_user.applications << p3
       
       applied_positions = [p1, p3]
@@ -62,23 +68,24 @@ describe DashboardController do
     
     it "gets positions the current user has not applied" do
       
-      other_user = FactoryGirl.create :bob
+      owner = FactoryGirl.create :bob
       
-      p1 = FactoryGirl.create :php_dev
+      p1 = FactoryGirl.create :php_dev, :user => owner
       subject.current_user.applications << p1
+      subject.current_user.save
       
-      p2 = FactoryGirl.create :rails_dev
-      other_user.positions << p2
-      other_user.save
+      p2 = FactoryGirl.create :rails_dev, :user => owner
+      owner.positions << p2
+      owner.save
       
-      p3 = FactoryGirl.create :perl_dev
+      p3 = FactoryGirl.create :perl_dev, :user => owner
       subject.current_user.applications << p3
       subject.current_user.save
       
       applied_positions = [p1, p3]
 
-       Position.stub(:unapplied).with(subject.current_user).and_return([p2])
-       Position.should_receive(:unapplied).and_return([p2])
+      Position.stub(:unapplied).with(subject.current_user).and_return([p2])
+      Position.should_receive(:unapplied).and_return([p2])
                
       get :index
       

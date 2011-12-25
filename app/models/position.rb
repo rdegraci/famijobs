@@ -1,8 +1,16 @@
 class Position < ActiveRecord::Base
   belongs_to :user
   validates_associated :user
+  validates_presence_of :user
   
-  has_many :job_applicants
+  validates :title, :presence => true
+  validates :description, :presence => true
+  validates :rate, :presence => true
+  validates :open, :inclusion => { :in => [ true, false ] } 
+
+   
+   
+  has_many :job_applicants, :dependent => :destroy
   has_many :applicants, :through => :job_applicants, :source => :user
       
   # Business Rules
