@@ -62,7 +62,8 @@ class PositionsController < ApplicationController
   # POST /positions.json
   def create
     @position = Position.new(params[:position])
-
+    @position.user = current_user
+    
     respond_to do |format|
       if @position.save
         current_user.positions << @position
